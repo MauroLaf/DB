@@ -1,0 +1,37 @@
+:Antes creamos una tabla de las unidades formativas del curso:
+
+DROP DATABASE IF EXISTS ifct0310;
+CREATE DATABASE ifct0310;
+USE ifct0310;
+CREATE TABLE MODULO (CODIGO VARCHAR(10) PRIMARY KEY
+					,TITULO VARCHAR (100) NOT NULL);
+CREATE TABLE UF     (CODIGO VARCHAR(10) PRIMARY KEY
+					,TITULO VARCHAR (100) NOT NULL
+					,MODULO VARCHAR (10) NOT NULL
+					,FOREIGN KEY (MODULO) REFERENCES MODULO (CODIGO));
+INSERT INTO MODULO VALUES ('MF0224_3','ADMINISTRACION DE SGBDs');
+INSERT INTO UF 	   VALUES 			              ('UF1468','ALMACENAMIENTO DE LA INFORMACION E INTRODUCCIÓN A LOS SGBD','MF0224_3'),
+						              ('UF1469','SGBD E INSTALACIÓN','MF0224_3'),
+						              ('UF1470','ADMINISTRACIÓN Y MONITORIZACIÓN DE LOS SGBD','MF0224_3');
+
+:Podemos guardarlo en un blog de notas "ifct0310.sql" y mas tarde cargarlo con este comando: 
+
+source ifct0310.sql <---- deberemos añadir la ruta si no lo guardamos en /XAMPP/MYSQL/BIN
+
+:Consultamos la integridad referencial y econtramos la clave foranea:
+
+MariaDB [ifct0310]> SELECT CONSTRAINT_NAME, CONSTRAINT_TYPE
+		    FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
+		    WHERE TABLE_NAME='UF';
+
+:Podemos observar con este comando las relaciones de esa clave que acabamos de encontrar:
+
+MariaDB [ifct0310]> SELECT COLUMN_NAME
+		    	,REFERENCED_TABLE_NAME
+			,REFERENCED_COLUMN_NAME
+		    FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+		    WHERE CONSTRAINT_NAME='uf_ibfk_1';
+
+
+
+
