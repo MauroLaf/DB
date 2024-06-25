@@ -58,4 +58,4 @@ CREATE TABLE employees (
 	phone_number VARCHAR(20),
 	hire_date DATE NOT NULL,
 	job_id VARCHAR(10) NOT NULL,
-	salary DECIMAL(8, 2) NOT NULL,
+	salary DECIMAL(8, 2) NOT NULL);

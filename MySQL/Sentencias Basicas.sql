@@ -1,4 +1,4 @@
-:Select:
+:SELECT:
 
 SELECT [ALL/DISTINCT ]
 [expre_colum1, expre_colum2, ..., expre_column | * ]
